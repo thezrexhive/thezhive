@@ -1,0 +1,16 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "firebase-admin": "^11.5.0",
+    "firebase-functions": "^4.2.1",
+    "@google-ai/generativelanguage": "^1.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}
