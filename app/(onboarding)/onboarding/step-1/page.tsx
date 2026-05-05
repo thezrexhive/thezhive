@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
 import { createClient } from "@/lib/supabase/client";
 
 export default function OnboardingStep1() {
@@ -33,40 +35,71 @@ export default function OnboardingStep1() {
   }
 
   return (
-    <div className="animate-in">
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+    >
       <div className="mb-8">
-        <p className="text-xs font-semibold text-primary-500 uppercase tracking-widest mb-2">Step 1 of 3</p>
-        <h1 className="text-2xl font-bold text-neutral-900 mb-2">Create your account</h1>
-        <p className="text-sm text-secondary-500">Set up your ZRexHive account in under a minute.</p>
+        <p className="text-xs font-semibold text-primary-600 uppercase tracking-widest mb-2">Step 1 of 3</p>
+        <h1 className="text-2xl font-semibold text-neutral-900 tracking-tight mb-2">Create your account</h1>
+        <p className="text-sm text-neutral-500">Set up your ZRexHive account in under a minute.</p>
       </div>
 
-      <div className="h-1 bg-neutral-200 rounded-full mb-10 overflow-hidden">
-        <div className="h-full bg-primary-500 rounded-full" style={{ width: "33%" }} role="progressbar" aria-valuenow={33} aria-valuemin={0} aria-valuemax={100} aria-label="Step 1 of 3" />
+      <div className="h-1 bg-neutral-100 rounded-full mb-10 overflow-hidden">
+        <motion.div
+          className="h-full rounded-full bg-gradient-primary"
+          initial={{ width: 0 }}
+          animate={{ width: "33%" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          role="progressbar"
+          aria-valuenow={33} aria-valuemin={0} aria-valuemax={100}
+          aria-label="Step 1 of 3"
+        />
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-        <div>
-          <label htmlFor="displayName" className="block text-sm font-medium text-secondary-700 mb-1.5">Full name</label>
-          <input id="displayName" type="text" required autoComplete="name" autoFocus value={formData.displayName} onChange={(e) => setFormData((p) => ({ ...p, displayName: e.target.value }))} placeholder="Alex Rivera" className="w-full h-11 px-3.5 rounded-lg border border-neutral-200 text-sm text-neutral-900 placeholder:text-secondary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow" />
-        </div>
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-secondary-700 mb-1.5">Work email</label>
-          <input id="email" type="email" required autoComplete="email" value={formData.email} onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))} placeholder="alex@company.com" className="w-full h-11 px-3.5 rounded-lg border border-neutral-200 text-sm text-neutral-900 placeholder:text-secondary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow" />
-        </div>
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium text-secondary-700 mb-1.5">Password</label>
-          <input id="password" type="password" required autoComplete="new-password" minLength={8} value={formData.password} onChange={(e) => setFormData((p) => ({ ...p, password: e.target.value }))} placeholder="Min. 8 characters" className="w-full h-11 px-3.5 rounded-lg border border-neutral-200 text-sm text-neutral-900 placeholder:text-secondary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow" />
-        </div>
+      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+        <Input
+          label="Full name"
+          type="text"
+          required
+          autoComplete="name"
+          autoFocus
+          value={formData.displayName}
+          onChange={(e) => setFormData((p) => ({ ...p, displayName: e.target.value }))}
+          placeholder="Alex Rivera"
+        />
+        <Input
+          label="Work email"
+          type="email"
+          required
+          autoComplete="email"
+          value={formData.email}
+          onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
+          placeholder="alex@company.com"
+        />
+        <Input
+          label="Password"
+          type="password"
+          required
+          autoComplete="new-password"
+          minLength={8}
+          value={formData.password}
+          onChange={(e) => setFormData((p) => ({ ...p, password: e.target.value }))}
+          placeholder="Min. 8 characters"
+          helperText="Must be at least 8 characters"
+          error={error ?? undefined}
+        />
 
-        {error && <div role="alert" className="p-3 rounded-lg bg-error-50 border border-error-100 text-sm text-error-600">{error}</div>}
-
-        <Button type="submit" variant="primary" fullWidth size="lg" loading={loading} className="mt-2">Continue</Button>
+        <Button type="submit" variant="gradient" fullWidth size="lg" loading={loading} className="mt-2">
+          Continue
+        </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-secondary-500">
+      <p className="mt-6 text-center text-sm text-neutral-500">
         Already have an account?{" "}
-        <a href="/login" className="font-medium text-primary-500 hover:text-primary-600 transition-colors">Sign in</a>
+        <a href="/login" className="font-medium text-primary-600 hover:text-primary-700 transition-colors">Sign in</a>
       </p>
-    </div>
+    </motion.div>
   );
 }

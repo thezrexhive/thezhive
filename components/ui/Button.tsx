@@ -1,58 +1,79 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { ButtonProps } from "@/types";
 
-const variantClasses = {
-  primary: "bg-primary-500 text-white hover:bg-primary-600 focus-visible:ring-primary-500/40 shadow-sm",
-  secondary: "bg-white text-primary-500 border border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300 focus-visible:ring-primary-500/20 shadow-sm",
-  ghost: "bg-transparent text-secondary-700 hover:bg-neutral-100 hover:text-secondary-900 focus-visible:ring-secondary-500/20",
-  danger: "bg-error-500 text-white hover:bg-error-600 focus-visible:ring-error-500/40 shadow-sm",
+const variantClasses: Record<string, string> = {
+  primary:   "bg-primary-600 text-white hover:bg-primary-700 shadow-xs active:bg-primary-800",
+  secondary: "bg-white text-neutral-800 border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 shadow-xs",
+  ghost:     "bg-transparent text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900",
+  gradient:  "bg-gradient-primary text-white shadow-xs hover:opacity-90",
+  danger:    "bg-error-600 text-white hover:bg-error-700 shadow-xs",
 };
 
-const sizeClasses = {
-  sm: "h-8 px-3 text-sm gap-1.5 rounded-md",
-  md: "h-10 px-4 text-sm gap-2 rounded-lg",
-  lg: "h-12 px-6 text-base gap-2.5 rounded-lg",
+const sizeClasses: Record<string, string> = {
+  sm: "h-8  px-3   text-xs  gap-1.5 rounded-lg",
+  md: "h-10 px-4   text-sm  gap-2   rounded-xl",
+  lg: "h-12 px-6   text-base gap-2.5 rounded-xl",
+};
+
+const loadingVariants = {
+  animate: { rotate: 360, transition: { repeat: Infinity, duration: 0.75, ease: "linear" } },
 };
 
 export function Button({
   children, className, variant = "primary", size = "md",
-  loading = false, leftIcon, rightIcon, fullWidth = false, href, disabled, ...props
+  loading = false, leftIcon, rightIcon, fullWidth = false,
+  href, disabled, ...props
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center font-medium transition-all duration-150",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1",
-    "disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none active:scale-[0.98]",
-    variantClasses[variant],
-    sizeClasses[size],
+    "inline-flex items-center justify-center font-medium transition-all duration-200",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2",
+    "disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none",
+    variantClasses[variant ?? "primary"],
+    sizeClasses[size ?? "md"],
     fullWidth && "w-full",
     className
+  );
+
+  const content = loading ? (
+    <>
+      <motion.span
+        variants={loadingVariants}
+        animate="animate"
+        className="block h-4 w-4 rounded-full border-2 border-current border-t-transparent"
+        aria-hidden="true"
+      />
+      <span>Loading</span>
+    </>
+  ) : (
+    <>
+      {leftIcon  && <span aria-hidden="true">{leftIcon}</span>}
+      {children}
+      {rightIcon && <span aria-hidden="true">{rightIcon}</span>}
+    </>
   );
 
   if (href) {
     return (
       <Link href={href} className={classes}>
-        {leftIcon && <span aria-hidden="true">{leftIcon}</span>}
-        {children}
-        {rightIcon && <span aria-hidden="true">{rightIcon}</span>}
+        {content}
       </Link>
     );
   }
 
   return (
-    <button className={classes} disabled={disabled || loading} aria-disabled={disabled || loading} {...props}>
-      {loading ? (
-        <>
-          <span className="size-4 rounded-full border-2 border-current border-t-transparent animate-spin" aria-hidden="true" />
-          <span>Loading…</span>
-        </>
-      ) : (
-        <>
-          {leftIcon && <span aria-hidden="true">{leftIcon}</span>}
-          {children}
-          {rightIcon && <span aria-hidden="true">{rightIcon}</span>}
-        </>
-      )}
-    </button>
+    <motion.button
+      whileTap={{ scale: 0.97 }}
+      transition={{ duration: 0.1 }}
+      className={classes}
+      disabled={disabled || loading}
+      aria-disabled={disabled || loading}
+      {...(props as React.ComponentPropsWithoutRef<typeof motion.button>)}
+    >
+      {content}
+    </motion.button>
   );
 }

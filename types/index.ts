@@ -65,7 +65,7 @@ export interface SectionProps {
   spacing?: "sm" | "md" | "lg" | "xl";
 }
 
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "gradient" | "danger";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -76,4 +76,35 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   rightIcon?: React.ReactNode;
   fullWidth?: boolean;
   href?: string;
+}
+
+// Input
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+  label?: string;
+  helperText?: string;
+  error?: string;
+  success?: string;
+  size?: "sm" | "md" | "lg";
+  leftElement?: React.ReactNode;
+  rightElement?: React.ReactNode;
+}
+
+// Card
+export type CardVariant = "default" | "elevated" | "bordered" | "gradient";
+export interface CardProps {
+  children: React.ReactNode;
+  className?: string;
+  as?: React.ElementType;
+  variant?: CardVariant;
+  padding?: "none" | "sm" | "md" | "lg";
+  hover?: boolean;
+  animate?: boolean;
+}
+
+// Divider
+export interface DividerProps {
+  orientation?: "horizontal" | "vertical";
+  label?: string;
+  className?: string;
+  decorative?: boolean;
 }
