@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, BarChart3, Shield, Zap, Users, Globe, CheckCircle } from "lucide-react";
+import { ArrowRight, ChartBar as BarChart3, Shield, Zap, Users, Globe, CircleCheck as CheckCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";

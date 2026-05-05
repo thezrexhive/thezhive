@@ -3,10 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard, Settings, Users, BarChart3,
-  FileText, Bell, HelpCircle, ChevronLeft, ChevronRight, Zap,
-} from "lucide-react";
+import { LayoutDashboard, Settings, Users, ChartBar as BarChart3, FileText, Bell, CircleHelp as HelpCircle, ChevronLeft, ChevronRight, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { SidebarItem } from "@/types";
 

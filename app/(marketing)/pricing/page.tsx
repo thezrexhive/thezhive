@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CheckCircle, XCircle } from "lucide-react";
+import { CircleCheck as CheckCircle, Circle as XCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";

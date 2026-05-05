@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TrendingUp, TrendingDown, Users, Zap, BarChart3, FileText } from "lucide-react";
+import { TrendingUp, TrendingDown, Users, Zap, ChartBar as BarChart3, FileText } from "lucide-react";
 import { TopNav } from "@/components/layout/TopNav";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";

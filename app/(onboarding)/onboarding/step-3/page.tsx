@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CheckCircle, ArrowRight } from "lucide-react";
+import { CircleCheck as CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 const nextSteps = [
