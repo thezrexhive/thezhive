@@ -36,22 +36,22 @@ export default function OnboardingStep1() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
+      transition={{ duration: 0.3, ease: [0.175, 0.885, 0.32, 1.275] }}
     >
       <div className="mb-8">
-        <p className="text-xs font-semibold text-primary-600 uppercase tracking-widest mb-2">Step 1 of 3</p>
+        <p className="text-xs font-semibold text-gradient-pp uppercase tracking-widest mb-2">Step 1 of 3</p>
         <h1 className="text-2xl font-semibold text-neutral-900 tracking-tight mb-2">Create your account</h1>
         <p className="text-sm text-neutral-500">Set up your ZRexHive account in under a minute.</p>
       </div>
 
-      <div className="h-1 bg-neutral-100 rounded-full mb-10 overflow-hidden">
+      <div className="h-1.5 bg-neutral-100 rounded-full mb-10 overflow-hidden">
         <motion.div
-          className="h-full rounded-full bg-gradient-primary"
+          className="h-full rounded-full bg-gradient-pp"
           initial={{ width: 0 }}
           animate={{ width: "33%" }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: [0.175, 0.885, 0.32, 1.275] }}
           role="progressbar"
           aria-valuenow={33} aria-valuemin={0} aria-valuemax={100}
           aria-label="Step 1 of 3"
@@ -91,7 +91,7 @@ export default function OnboardingStep1() {
           error={error ?? undefined}
         />
 
-        <Button type="submit" variant="gradient" fullWidth size="lg" loading={loading} className="mt-2">
+        <Button type="submit" variant="primary" fullWidth size="lg" loading={loading} className="mt-2">
           Continue
         </Button>
       </form>

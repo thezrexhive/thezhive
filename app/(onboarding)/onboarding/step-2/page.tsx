@@ -27,22 +27,22 @@ export default function OnboardingStep2() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
+      transition={{ duration: 0.3, ease: [0.175, 0.885, 0.32, 1.275] }}
     >
       <div className="mb-8">
-        <p className="text-xs font-semibold text-primary-600 uppercase tracking-widest mb-2">Step 2 of 3</p>
+        <p className="text-xs font-semibold text-gradient-pp uppercase tracking-widest mb-2">Step 2 of 3</p>
         <h1 className="text-2xl font-semibold text-neutral-900 tracking-tight mb-2">Choose your plan</h1>
         <p className="text-sm text-neutral-500">Start free and upgrade anytime. No credit card required.</p>
       </div>
 
-      <div className="h-1 bg-neutral-100 rounded-full mb-10 overflow-hidden">
+      <div className="h-1.5 bg-neutral-100 rounded-full mb-10 overflow-hidden">
         <motion.div
-          className="h-full rounded-full bg-gradient-primary"
+          className="h-full rounded-full bg-gradient-pp"
           initial={{ width: "33%" }}
           animate={{ width: "66%" }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: [0.175, 0.885, 0.32, 1.275] }}
           role="progressbar"
           aria-valuenow={66} aria-valuemin={0} aria-valuemax={100}
           aria-label="Step 2 of 3"
@@ -57,9 +57,9 @@ export default function OnboardingStep2() {
             onClick={() => setSelected(plan.id)}
             aria-pressed={selected === plan.id}
             className={cn(
-              "w-full text-left p-4 rounded-2xl border-2 transition-all duration-150",
+              "w-full text-left p-4 rounded-3xl border-2 transition-all duration-150",
               selected === plan.id
-                ? "border-primary-500 bg-primary-50/50 shadow-glow"
+                ? "border-primary-500 bg-tint-purple shadow-glow-purple"
                 : "border-neutral-200 bg-white hover:border-neutral-300"
             )}
           >
@@ -77,7 +77,7 @@ export default function OnboardingStep2() {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-semibold text-neutral-900">{plan.name}</span>
-                    {plan.highlighted && <Badge variant="accent" size="sm">Popular</Badge>}
+                    {plan.highlighted && <Badge variant="yellow" size="sm">Popular</Badge>}
                   </div>
                   <p className="text-xs text-neutral-500 mt-0.5">{plan.description}</p>
                 </div>
@@ -96,7 +96,7 @@ export default function OnboardingStep2() {
         ))}
       </div>
 
-      <Button variant="gradient" fullWidth size="lg" loading={loading} onClick={handleContinue}>
+      <Button variant="primary" fullWidth size="lg" loading={loading} onClick={handleContinue}>
         Continue with {plans.find((p) => p.id === selected)?.name} plan
       </Button>
     </motion.div>

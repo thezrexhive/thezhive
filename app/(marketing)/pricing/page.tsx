@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CircleCheck as CheckCircle, Circle as XCircle } from "lucide-react";
+import { CircleCheck as CheckCircle, Circle as XCircle, Sparkles, Zap, Building2 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
@@ -54,10 +54,16 @@ const plans: PricingPlan[] = [
   },
 ];
 
+const planIcons = {
+  free: Zap,
+  pro: Sparkles,
+  enterprise: Building2,
+};
+
 const faqs = [
-  { q: "Can I change my plan anytime?",       a: "Yes. Changes take effect immediately for upgrades and at the next billing cycle for downgrades." },
-  { q: "Is there a free trial for paid plans?", a: "Yes. Pro and Enterprise come with a 14-day free trial. No credit card required." },
-  { q: "What payment methods do you accept?",  a: "All major credit cards (Visa, Mastercard, Amex) and ACH transfers for annual enterprise contracts." },
+  { q: "Can I change my plan anytime?",         a: "Yes. Changes take effect immediately for upgrades and at the next billing cycle for downgrades." },
+  { q: "Is there a free trial for paid plans?",  a: "Yes. Pro and Enterprise come with a 14-day free trial. No credit card required." },
+  { q: "What payment methods do you accept?",   a: "All major credit cards (Visa, Mastercard, Amex) and ACH transfers for annual enterprise contracts." },
   { q: "What happens to my data if I downgrade?", a: "Your data is always safe. Projects exceeding plan limits are archived (not deleted) and can be restored by upgrading." },
 ];
 
@@ -79,51 +85,57 @@ export default function PricingPage() {
       <Section spacing="sm">
         <Container>
           <div className="grid md:grid-cols-3 gap-6 items-stretch">
-            {plans.map((plan) => (
-              <div
-                key={plan.id}
-                className={`relative flex flex-col rounded-2xl p-8 ${
-                  plan.highlighted
-                    ? "bg-gradient-primary text-white shadow-modal ring-1 ring-primary-500"
-                    : "bg-white border border-neutral-200 shadow-card"
-                }`}
-              >
-                {plan.highlighted && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <Badge variant="accent" size="md">Most popular</Badge>
-                  </div>
-                )}
-                <div className="mb-6">
-                  <h2 className={`text-lg font-bold mb-1 ${plan.highlighted ? "text-white" : "text-neutral-900"}`}>{plan.name}</h2>
-                  <p className={`text-sm ${plan.highlighted ? "text-primary-200" : "text-neutral-500"}`}>{plan.description}</p>
-                </div>
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-1">
-                    <span className={`text-4xl font-bold ${plan.highlighted ? "text-white" : "text-neutral-900"}`}>${plan.price}</span>
-                    <span className={`text-sm ${plan.highlighted ? "text-primary-200" : "text-neutral-500"}`}>/ {plan.priceSuffix}</span>
-                  </div>
-                </div>
-                <ul className="flex-1 space-y-3 mb-8" role="list">
-                  {plan.features.map((feature) => (
-                    <li key={feature.text} className="flex items-start gap-2.5">
-                      {feature.included
-                        ? <CheckCircle className={`h-4 w-4 shrink-0 mt-0.5 ${plan.highlighted ? "text-white" : "text-primary-600"}`} aria-label="Included" />
-                        : <XCircle    className={`h-4 w-4 shrink-0 mt-0.5 ${plan.highlighted ? "text-primary-300" : "text-neutral-300"}`} aria-label="Not included" />}
-                      <span className={`text-sm ${feature.included ? (plan.highlighted ? "text-white" : "text-neutral-700") : (plan.highlighted ? "text-primary-300" : "text-neutral-400")}`}>
-                        {feature.text}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  variant={plan.highlighted ? "secondary" : "primary"}
-                  fullWidth
-                  href={plan.id === "enterprise" ? "/contact" : "/onboarding/step-1"}
+            {plans.map((plan) => {
+              const PlanIcon = planIcons[plan.id];
+              return (
+                <div
+                  key={plan.id}
+                  className={`relative flex flex-col rounded-3xl p-8 ${
+                    plan.highlighted
+                      ? "bg-gradient-pp text-white shadow-modal"
+                      : "bg-white border border-neutral-200 shadow-card"
+                  }`}
                 >
-                  {plan.ctaLabel}
-                </Button>
-              </div>
-            ))}
+                  {plan.highlighted && (
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                      <Badge variant="yellow" size="md">Most popular</Badge>
+                    </div>
+                  )}
+                  <div className="mb-6">
+                    <div className={`h-10 w-10 rounded-2xl flex items-center justify-center mb-4 ${plan.highlighted ? "bg-white/20" : "bg-tint-purple"}`}>
+                      <PlanIcon className={`h-5 w-5 ${plan.highlighted ? "text-white" : "text-primary-600"}`} aria-hidden="true" />
+                    </div>
+                    <h2 className={`text-lg font-bold mb-1 ${plan.highlighted ? "text-white" : "text-neutral-900"}`}>{plan.name}</h2>
+                    <p className={`text-sm ${plan.highlighted ? "text-white/70" : "text-neutral-500"}`}>{plan.description}</p>
+                  </div>
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-1">
+                      <span className={`text-4xl font-bold ${plan.highlighted ? "text-white" : "text-neutral-900"}`}>${plan.price}</span>
+                      <span className={`text-sm ${plan.highlighted ? "text-white/70" : "text-neutral-500"}`}>/ {plan.priceSuffix}</span>
+                    </div>
+                  </div>
+                  <ul className="flex-1 space-y-3 mb-8" role="list">
+                    {plan.features.map((feature) => (
+                      <li key={feature.text} className="flex items-start gap-2.5">
+                        {feature.included
+                          ? <CheckCircle className={`h-4 w-4 shrink-0 mt-0.5 ${plan.highlighted ? "text-yellow-300" : "text-primary-600"}`} aria-label="Included" />
+                          : <XCircle    className={`h-4 w-4 shrink-0 mt-0.5 ${plan.highlighted ? "text-white/30" : "text-neutral-300"}`} aria-label="Not included" />}
+                        <span className={`text-sm ${feature.included ? (plan.highlighted ? "text-white" : "text-neutral-700") : (plan.highlighted ? "text-white/40" : "text-neutral-400")}`}>
+                          {feature.text}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    variant={plan.highlighted ? "yellow" : "primary"}
+                    fullWidth
+                    href={plan.id === "enterprise" ? "/contact" : "/onboarding/step-1"}
+                  >
+                    {plan.ctaLabel}
+                  </Button>
+                </div>
+              );
+            })}
           </div>
         </Container>
       </Section>

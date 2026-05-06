@@ -4,14 +4,17 @@ interface TextProps {
   children: React.ReactNode;
   className?: string;
   as?: React.ElementType;
-  gradient?: boolean;
+  gradient?: "pp" | "pb" | "py" | "full" | false;
 }
 
 export function Hero({ children, className, as: Tag = "h1", gradient = false }: TextProps) {
   return (
     <Tag className={cn(
       "text-hero font-bold tracking-tight text-neutral-900",
-      gradient && "text-gradient",
+      gradient === "pp"   && "text-gradient-pp",
+      gradient === "pb"   && "text-gradient-pb",
+      gradient === "py"   && "text-gradient-py",
+      gradient === "full" && "text-gradient-full",
       className
     )}>
       {children}
@@ -23,7 +26,10 @@ export function Title({ children, className, as: Tag = "h2", gradient = false }:
   return (
     <Tag className={cn(
       "text-title font-semibold tracking-tight text-neutral-900",
-      gradient && "text-gradient",
+      gradient === "pp"   && "text-gradient-pp",
+      gradient === "pb"   && "text-gradient-pb",
+      gradient === "py"   && "text-gradient-py",
+      gradient === "full" && "text-gradient-full",
       className
     )}>
       {children}
@@ -84,7 +90,7 @@ export function Caption({ children, className, as: Tag = "span" }: TextProps) {
 export function Overline({ children, className, as: Tag = "p" }: TextProps) {
   return (
     <Tag className={cn(
-      "text-xs font-semibold uppercase tracking-widest text-primary-600",
+      "text-xs font-semibold uppercase tracking-widest text-gradient-pp",
       className
     )}>
       {children}

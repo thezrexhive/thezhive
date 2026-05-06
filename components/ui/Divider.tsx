@@ -12,7 +12,7 @@ export function Divider({
       <div
         role={decorative ? "none" : "separator"}
         aria-orientation="vertical"
-        className={cn("self-stretch w-px bg-neutral-200", className)}
+        className={cn("self-stretch w-px bg-gradient-to-b from-transparent via-neutral-200 to-transparent", className)}
       />
     );
   }
@@ -24,11 +24,11 @@ export function Divider({
         aria-orientation="horizontal"
         className={cn("flex items-center gap-4", className)}
       >
-        <div className="flex-1 h-px bg-neutral-200" />
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent to-neutral-200" />
         <span className="text-xs font-medium text-neutral-400 uppercase tracking-widest select-none whitespace-nowrap">
           {label}
         </span>
-        <div className="flex-1 h-px bg-neutral-200" />
+        <div className="flex-1 h-px bg-gradient-to-l from-transparent to-neutral-200" />
       </div>
     );
   }
@@ -36,7 +36,7 @@ export function Divider({
   return (
     <hr
       role={decorative ? "none" : "separator"}
-      className={cn("border-none h-px bg-neutral-200 w-full", className)}
+      className={cn("border-none h-px bg-gradient-to-r from-transparent via-neutral-200 to-neutral-200 w-full", className)}
     />
   );
 }

@@ -12,19 +12,19 @@ export const metadata: Metadata = {
 };
 
 const values = [
-  { title: "Transparency first",   description: "No hidden pricing, no vague roadmaps, no BS. We believe in radical honesty with our customers and within our team." },
-  { title: "Craft over speed",     description: "We move fast but never cut corners on quality. Every feature is polished before it ships." },
-  { title: "Customer obsession",   description: "We answer every support ticket, read every review, and act on every piece of feedback." },
-  { title: "Long-term thinking",   description: "We're building a company for decades, not an exit. Sustainable growth and decisions that benefit customers long-term." },
+  { title: "Transparency first",  description: "No hidden pricing, no vague roadmaps, no BS. We believe in radical honesty with our customers and within our team.", iconBg: "bg-tint-purple", iconColor: "bg-gradient-pp" },
+  { title: "Craft over speed",    description: "We move fast but never cut corners on quality. Every feature is polished before it ships.",                          iconBg: "bg-tint-pink",   iconColor: "bg-gradient-py" },
+  { title: "Customer obsession",  description: "We answer every support ticket, read every review, and act on every piece of feedback.",                            iconBg: "bg-tint-yellow", iconColor: "bg-yellow-500" },
+  { title: "Long-term thinking",  description: "We're building a company for decades, not an exit. Sustainable growth and decisions that benefit customers long-term.", iconBg: "bg-tint-blue",   iconColor: "bg-blue-400" },
 ];
 
 const team = [
-  { name: "Alex Rivera",   role: "Co-founder & CEO",          initials: "AR" },
-  { name: "Jordan Kim",    role: "Co-founder & CTO",          initials: "JK" },
-  { name: "Taylor Osei",   role: "Head of Design",            initials: "TO" },
-  { name: "Sam Patel",     role: "Head of Engineering",       initials: "SP" },
-  { name: "Casey Liu",     role: "Head of Growth",            initials: "CL" },
-  { name: "Morgan Walsh",  role: "Head of Customer Success",  initials: "MW" },
+  { name: "Alex Rivera",  role: "Co-founder & CEO",         initials: "AR", gradient: "bg-gradient-pp" },
+  { name: "Jordan Kim",   role: "Co-founder & CTO",         initials: "JK", gradient: "bg-gradient-pb" },
+  { name: "Taylor Osei",  role: "Head of Design",           initials: "TO", gradient: "bg-gradient-py" },
+  { name: "Sam Patel",    role: "Head of Engineering",      initials: "SP", gradient: "bg-gradient-pp" },
+  { name: "Casey Liu",    role: "Head of Growth",           initials: "CL", gradient: "bg-yellow-500" },
+  { name: "Morgan Walsh", role: "Head of Customer Success", initials: "MW", gradient: "bg-blue-400" },
 ];
 
 export default function AboutPage() {
@@ -36,7 +36,7 @@ export default function AboutPage() {
             <Overline className="mb-6">Our mission</Overline>
             <h1 className="text-hero font-bold tracking-tight text-neutral-900 mb-8 leading-tight">
               We&apos;re building the platform<br />
-              <span className="text-gradient">teams actually love using.</span>
+              <span className="text-gradient-pp">teams actually love using.</span>
             </h1>
             <Body size="lg" className="mb-6">
               ZRexHive was born out of frustration. We were tired of stitching together a dozen tools that never quite worked together, of paying for features we didn&apos;t need, and of slow platforms that couldn&apos;t keep up with our team&apos;s pace.
@@ -68,10 +68,10 @@ export default function AboutPage() {
             <h2 className="text-title font-semibold tracking-tight text-neutral-900 mb-4">What we stand for</h2>
             <Body>These values guide every decision we make.</Body>
           </div>
-          <div className="grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {values.map((value) => (
-              <div key={value.title} className="flex gap-4">
-                <div className="flex h-2 w-2 rounded-full bg-gradient-primary mt-2.5 shrink-0" aria-hidden="true" />
+              <div key={value.title} className="flex gap-4 p-6 rounded-3xl bg-white border border-neutral-200 shadow-card hover:shadow-card-hover transition-shadow">
+                <div className={`h-8 w-8 rounded-xl ${value.iconColor} shrink-0 mt-0.5`} aria-hidden="true" />
                 <div>
                   <h3 className="text-base font-semibold text-neutral-900 mb-2">{value.title}</h3>
                   <p className="text-sm text-neutral-500 leading-relaxed">{value.description}</p>
@@ -93,7 +93,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
             {team.map((member) => (
               <div key={member.name} className="text-center">
-                <div className="h-16 w-16 rounded-2xl bg-gradient-primary flex items-center justify-center text-white text-lg font-bold mx-auto mb-3">
+                <div className={`h-16 w-16 rounded-3xl ${member.gradient} flex items-center justify-center text-white text-lg font-bold mx-auto mb-3 shadow-card`}>
                   {member.initials}
                 </div>
                 <p className="text-sm font-semibold text-neutral-900">{member.name}</p>
@@ -106,14 +106,17 @@ export default function AboutPage() {
 
       <Section spacing="lg">
         <Container size="md">
-          <div className="text-center">
-            <h2 className="text-title font-semibold tracking-tight text-neutral-900 mb-4">Come build with us</h2>
-            <Body className="mb-8 max-w-md mx-auto">
-              We&apos;re always looking for talented people who care about craft, customers, and building something that lasts.
-            </Body>
-            <div className="flex items-center justify-center gap-3">
-              <Button variant="gradient" size="lg" href="/careers">View open roles</Button>
-              <Button variant="ghost"    size="lg" href="/contact">Get in touch</Button>
+          <div className="relative rounded-3xl bg-gradient-pp px-8 py-16 text-center overflow-hidden">
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top,_white_0%,_transparent_60%)]" />
+            <div className="relative">
+              <h2 className="text-title font-semibold text-white mb-4">Come build with us</h2>
+              <Body className="mb-8 max-w-md mx-auto text-white/70">
+                We&apos;re always looking for talented people who care about craft, customers, and building something that lasts.
+              </Body>
+              <div className="flex items-center justify-center gap-3">
+                <Button variant="yellow" size="lg" href="/careers">View open roles</Button>
+                <Button variant="ghost"  size="lg" href="/contact" className="text-white hover:bg-white/10 hover:text-white">Get in touch</Button>
+              </div>
             </div>
           </div>
         </Container>

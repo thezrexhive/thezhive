@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 import type { InputProps } from "@/types";
 
 const sizeClasses: Record<string, string> = {
-  sm: "h-8  px-3   text-xs  rounded-lg",
-  md: "h-10 px-3.5 text-sm  rounded-xl",
-  lg: "h-12 px-4   text-base rounded-xl",
+  sm: "h-8  px-3   text-xs  rounded-xl",
+  md: "h-10 px-3.5 text-sm  rounded-2xl",
+  lg: "h-12 px-4   text-base rounded-2xl",
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
@@ -18,12 +18,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const state = error ? "error" : success ? "success" : "default";
 
   const wrapperClasses = cn(
-    "w-full border bg-white transition-shadow duration-200",
+    "w-full border bg-white transition-all duration-200",
     "flex items-center gap-2",
     sizeClasses[size],
     state === "error"   && "border-error-500 focus-within:ring-2 focus-within:ring-error-500/20",
     state === "success" && "border-success-500 focus-within:ring-2 focus-within:ring-success-500/20",
-    state === "default" && "border-neutral-200 focus-within:border-primary-600 focus-within:ring-2 focus-within:ring-primary-600/15",
+    state === "default" && "border-neutral-200 focus-within:border-primary-400 focus-within:shadow-glow-purple",
     className
   );
 
@@ -32,7 +32,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       {label && (
         <label htmlFor={inputId} className="text-sm font-medium text-neutral-700 select-none">
           {label}
-          {props.required && <span className="text-error-500 ml-0.5" aria-hidden="true">*</span>}
+          {props.required && <span className="text-pink-500 ml-0.5" aria-hidden="true">*</span>}
         </label>
       )}
 
@@ -47,9 +47,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           id={inputId}
           aria-invalid={state === "error"}
           aria-describedby={
-            error   ? `${inputId}-error`  :
-            success ? `${inputId}-success` :
-            helperText ? `${inputId}-helper` : undefined
+            error      ? `${inputId}-error`   :
+            success    ? `${inputId}-success` :
+            helperText ? `${inputId}-helper`  : undefined
           }
           className={cn(
             "flex-1 bg-transparent outline-none placeholder:text-neutral-400",

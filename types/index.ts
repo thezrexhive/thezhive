@@ -65,7 +65,7 @@ export interface SectionProps {
   spacing?: "sm" | "md" | "lg" | "xl";
 }
 
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "gradient" | "danger";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "yellow" | "pink" | "blue" | "danger";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -90,7 +90,7 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
 }
 
 // Card
-export type CardVariant = "default" | "elevated" | "bordered" | "gradient";
+export type CardVariant = "default" | "tinted" | "yellow" | "pink" | "blue" | "gradient" | "glass";
 export interface CardProps {
   children: React.ReactNode;
   className?: string;

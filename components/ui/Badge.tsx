@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: "default" | "primary" | "accent" | "success" | "warning" | "error";
+  variant?: "default" | "purple" | "pink" | "yellow" | "blue" | "success" | "error";
   size?: "sm" | "md";
   dot?: boolean;
   className?: string;
@@ -10,19 +10,21 @@ interface BadgeProps {
 
 const variantClasses: Record<string, string> = {
   default: "bg-neutral-100 text-neutral-600",
-  primary: "bg-primary-50 text-primary-700 ring-1 ring-primary-200/60",
-  accent:  "bg-accent-50  text-accent-700  ring-1 ring-accent-200/60",
+  purple:  "bg-primary-50 text-primary-700 ring-1 ring-primary-200/60",
+  pink:    "bg-pink-50    text-pink-700    ring-1 ring-pink-200/60",
+  yellow:  "bg-yellow-100 text-yellow-800  ring-1 ring-yellow-300/60",
+  blue:    "bg-blue-50    text-blue-700    ring-1 ring-blue-200/60",
   success: "bg-success-50 text-success-700 ring-1 ring-success-200/60",
-  warning: "bg-warning-50 text-warning-700 ring-1 ring-warning-200/60",
   error:   "bg-error-50   text-error-700   ring-1 ring-error-200/60",
 };
 
 const dotColors: Record<string, string> = {
   default: "bg-neutral-400",
-  primary: "bg-primary-500",
-  accent:  "bg-accent-500",
+  purple:  "bg-primary-500",
+  pink:    "bg-pink-500",
+  yellow:  "bg-yellow-500",
+  blue:    "bg-blue-400",
   success: "bg-success-500",
-  warning: "bg-warning-500",
   error:   "bg-error-500",
 };
 
@@ -36,7 +38,7 @@ export function Badge({
 }: BadgeProps) {
   return (
     <span className={cn(
-      "inline-flex items-center rounded-full font-medium",
+      "inline-flex items-center rounded-xl font-medium",
       variantClasses[variant],
       sizeClasses[size],
       className

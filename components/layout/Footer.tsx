@@ -4,8 +4,8 @@ import { Divider } from "@/components/ui/Divider";
 
 const footerLinks = {
   Product: [
-    { label: "Features", href: "/#features" },
-    { label: "Pricing",  href: "/pricing" },
+    { label: "Features",  href: "/#features" },
+    { label: "Pricing",   href: "/pricing" },
     { label: "Changelog", href: "/changelog" },
   ],
   Company: [
@@ -27,8 +27,8 @@ export function Footer() {
         <div className="py-16 grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="inline-flex items-center gap-2 font-bold text-base mb-5">
-              <span className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-primary text-white text-xs font-bold">Z</span>
-              <span className="text-neutral-900">ZRex</span><span className="text-gradient">Hive</span>
+              <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-pp text-white text-xs font-bold">Z</span>
+              <span className="text-neutral-900">ZRex</span><span className="text-gradient-pp">Hive</span>
             </Link>
             <p className="text-sm text-neutral-500 leading-relaxed max-w-xs">
               The SaaS platform built for modern teams who ship fast and scale confidently.
@@ -58,7 +58,7 @@ export function Footer() {
 
         <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-neutral-400">&copy; {new Date().getFullYear()} ZRexHive, Inc. All rights reserved.</p>
-          <p className="text-xs text-neutral-400">Built with care in San Francisco</p>
+          <p className="text-xs text-neutral-400">Made with ✦ in San Francisco</p>
         </div>
       </Container>
     </footer>

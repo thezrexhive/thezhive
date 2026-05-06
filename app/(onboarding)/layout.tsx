@@ -1,43 +1,27 @@
 import Link from "next/link";
 
-const steps = [
-  { step: 1, title: "Account setup" },
-  { step: 2, title: "Choose a plan" },
-  { step: 3, title: "All set!" },
-];
-
 export default function OnboardingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-neutral-50 flex flex-col">
-      <header className="bg-white/90 backdrop-blur-md border-b border-neutral-200/60">
+    <div className="min-h-screen onboarding-bg grain flex flex-col relative overflow-hidden">
+      {/* Subtle ambient blobs — lighter than landing page */}
+      <div className="absolute top-0 left-1/3 w-80 h-80 rounded-full bg-primary-200/30 blur-[80px] pointer-events-none" aria-hidden="true" />
+      <div className="absolute bottom-10 right-1/4 w-64 h-64 rounded-full bg-pink-200/25 blur-[70px] pointer-events-none" aria-hidden="true" />
+
+      <header className="bg-white/70 backdrop-blur-md border-b border-white/60 relative z-10">
         <div className="max-w-container mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 font-bold text-base" aria-label="ZRexHive home">
-            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-primary text-white text-xs font-bold shadow-xs">Z</span>
-            <span className="text-neutral-900">ZRex</span><span className="text-gradient">Hive</span>
+            <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-gradient-pp text-white text-sm font-bold shadow-xs">Z</span>
+            <span className="text-neutral-900">ZRex</span><span className="text-gradient-pp">Hive</span>
           </Link>
-
-          <nav aria-label="Onboarding progress">
-            <ol className="flex items-center gap-2 sm:gap-4" role="list">
-              {steps.map((step, i) => (
-                <li key={step.step} className="flex items-center gap-2 sm:gap-4">
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold border-2 border-neutral-200 text-neutral-400 bg-white">
-                      {step.step}
-                    </span>
-                    <span className="hidden sm:block text-xs font-medium text-neutral-500">{step.title}</span>
-                  </div>
-                  {i < steps.length - 1 && <div className="hidden sm:block h-px w-8 bg-neutral-200" aria-hidden="true" />}
-                </li>
-              ))}
-            </ol>
-          </nav>
-
           <Link href="/" className="text-sm text-neutral-500 hover:text-neutral-700 transition-colors">Exit</Link>
         </div>
       </header>
 
-      <main className="flex-1 flex items-start justify-center py-16 px-6">
-        <div className="w-full max-w-lg">{children}</div>
+      <main className="flex-1 flex items-start justify-center py-16 px-6 relative z-10">
+        {/* Card container with glass effect */}
+        <div className="w-full max-w-lg bg-white/75 backdrop-blur-sm rounded-3xl border border-white/80 shadow-elevated p-8">
+          {children}
+        </div>
       </main>
     </div>
   );

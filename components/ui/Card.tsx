@@ -6,9 +6,12 @@ import type { CardProps } from "@/types";
 
 const variantClasses: Record<string, string> = {
   default:  "bg-white border border-neutral-200 shadow-card",
-  elevated: "bg-white shadow-elevated border border-neutral-100",
-  bordered: "bg-white border-2 border-neutral-200",
-  gradient: "bg-gradient-subtle border border-primary-100",
+  tinted:   "bg-tint-purple border border-primary-100/60 shadow-card",
+  yellow:   "bg-tint-yellow border border-yellow-500/20 shadow-card",
+  pink:     "bg-tint-pink border border-pink-500/20 shadow-card",
+  blue:     "bg-tint-blue border border-blue-400/20 shadow-card",
+  gradient: "bg-gradient-pp text-white border-0 shadow-elevated",
+  glass:    "glass-dark text-white",
 };
 
 const paddingClasses: Record<string, string> = {
@@ -18,24 +21,28 @@ const paddingClasses: Record<string, string> = {
   lg:   "p-8",
 };
 
+const springTransition = { type: "spring", stiffness: 300, damping: 20 };
+
 export function Card({
   children, className, as: Tag = "div",
   variant = "default", padding = "md",
   hover = false, animate = false,
 }: CardProps) {
   const classes = cn(
-    "rounded-2xl overflow-hidden",
+    "rounded-3xl overflow-hidden",
     variantClasses[variant],
     paddingClasses[padding],
     className
   );
 
+  const isGlass = variant === "glass";
+
   if (hover) {
     return (
       <motion.div
         className={classes}
-        whileHover={{ y: -2, boxShadow: "0 8px 24px -4px rgb(79 70 229 / 0.12)" }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        whileHover={{ y: -3, boxShadow: isGlass ? "0 8px 32px -4px rgb(0 0 0 / 0.5), 0 1px 0 0 rgb(255 255 255 / 0.1) inset" : "0 8px 24px -4px rgb(94 48 136 / 0.15)" }}
+        transition={springTransition}
       >
         {children}
       </motion.div>
@@ -48,7 +55,7 @@ export function Card({
         className={classes}
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
+        transition={{ duration: 0.3, ease: [0.175, 0.885, 0.32, 1.275] }}
       >
         {children}
       </motion.div>
